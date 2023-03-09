@@ -1,6 +1,12 @@
 import { createConnection } from 'mysql';
-import { DATABASENAME, HOST, PASSWORD, USERNAME } from '../isMobile-api/config/index';
+import express from 'express';
+import { DATABASENAME, HOST, PASSWORD, USERNAME } from './config/index.js';
+import bodyParser from 'body-parser';
 
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const connection = createConnection({
   host: HOST,
@@ -16,3 +22,5 @@ connection.connect((err) => {
     console.log('Connected to database!');
   }
 });
+
+export default app;
